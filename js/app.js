@@ -68,8 +68,15 @@ const processSearch = (dataLimit) => {
   loadPhones(searchText, dataLimit);
 };
 
+// handle search button click
 document.getElementById('btn-search').addEventListener('click', function () {
   processSearch(10);
+});
+
+document.getElementById('serach-field').addEventListener('keypress', function (e) {
+  if (e.key == 'Enter') {
+    processSearch(10);
+  }
 });
 
 const toggleSpinner = (isLoading) => {
@@ -85,5 +92,12 @@ const toggleSpinner = (isLoading) => {
 document.getElementById('btn-show-all').addEventListener('click', function () {
   processSearch();
 });
+
+const loadPhoneDetails = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  console.log(data.data);
+};
 
 // loadPhones('iphone');
